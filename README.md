@@ -64,7 +64,8 @@ Configure your `appsettings.json` file with the necessary API keys and settings:
     "FrankfurterBaseUrl": "https://api.frankfurter.app/",
     "UnsupportedCurrencies": [ "TRY", "PLN", "THB", "MXN" ]
   },
-  "ConcurrentThrottleRequest": 100, -- Set the Concurrent request number 
+  // Set the Concurrent request number 
+  "ConcurrentThrottleRequest": 100, 
   "IpRateLimiting": {
     "EnableEndpointRateLimiting": true,
     "StackBlockedRequests": true,

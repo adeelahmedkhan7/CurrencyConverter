@@ -32,7 +32,7 @@ The Currency Conversion Service Project is a .NET-based application designed to 
 1. **Clone the repository**
 
     ```sh
-    git clone https://github.com/your-username/conversion-service.git
+    git clone https://github.com/your-username/CurrencyConverter.git
     cd conversion-service
     ```
 

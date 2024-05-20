@@ -1,8 +1,8 @@
-# Conversion Project
+# Currency Conversion Project
 
 ## Overview
 
-The Conversion Service Project is a .NET-based application designed to handle currency conversion requests. It supports caching of conversion responses to enhance performance and reduce the number of requests to the external exchange rate API.
+The Currency Conversion Service Project is a .NET-based application designed to handle currency conversion requests. It supports caching of conversion responses to enhance performance and reduce the number of requests to the external exchange rate API.
 
 ## Features
 
@@ -79,10 +79,13 @@ Configure your `appsettings.json` file with the necessary API keys and settings:
   }
 }
 
-### Dependency Injection
+## Dependency Injection
 
-Ensure that your services and cache are properly registered in the Startup.cs or Program.cs file:
-```sh
+The Conversion Service Project utilizes dependency injection to manage the application's services and components. Dependency injection allows for loose coupling between classes, making the codebase more maintainable and testable.
+
+In the `Startup.cs` or `Program.cs` file, you can find the service registration configuration. Here's how it's typically done:
+
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddControllers();
@@ -90,4 +93,3 @@ public void ConfigureServices(IServiceCollection services)
     services.AddScoped<IExchangeRateService, ExchangeRateService>();
     services.AddScoped<IConversionService, ConversionService>();
 }
-```

@@ -113,7 +113,6 @@ Method: POST
 Request Body:
 
 ```json
-Copy code
 {
   "from": "USD",
   "to": "EUR",
@@ -123,7 +122,6 @@ Copy code
 Response:
 
 ```json
-Copy code
 {
   "from": "USD",
   "to": "EUR",
@@ -136,7 +134,6 @@ Copy code
 Unit tests are written using NUnit and Moq. To run the tests, use the following command:
 
 ```sh
-Copy code
 dotnet test
 ```
 #### Sample Unit Test
@@ -189,7 +186,6 @@ Adding Packages
 To add the necessary packages, run the following commands:
 
 ```sh
-Copy code
 dotnet add package Newtonsoft.Json
 dotnet add package Moq
 dotnet add package NUnit

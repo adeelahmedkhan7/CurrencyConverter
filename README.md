@@ -58,13 +58,19 @@ The Currency Conversion Service Project is a .NET-based application designed to 
 
 Configure your `appsettings.json` file with the necessary API keys and settings:
 
+#### ConcurrentThrottleRequest
+
+- **Type**: `integer`
+- **Default**: `100`
+- **Description**: Set the number of concurrent requests allowed, used in the throttle middleware.
+
 ```json
 {
   "ExchangeApiSettings": {
     "FrankfurterBaseUrl": "https://api.frankfurter.app/",
     "UnsupportedCurrencies": [ "TRY", "PLN", "THB", "MXN" ]
   },
-<!-- Set the Concurrent request number use in throttle middleware -->
+
   "ConcurrentThrottleRequest": 100, 
   "IpRateLimiting": {
     "EnableEndpointRateLimiting": true,

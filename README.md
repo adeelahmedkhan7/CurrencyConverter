@@ -78,3 +78,16 @@ Configure your `appsettings.json` file with the necessary API keys and settings:
     ]
   }
 }
+
+### Dependency Injection
+
+Ensure that your services and cache are properly registered in the Startup.cs or Program.cs file:
+```sh
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers();
+    services.AddMemoryCache();
+    services.AddScoped<IExchangeRateService, ExchangeRateService>();
+    services.AddScoped<IConversionService, ConversionService>();
+}
+```

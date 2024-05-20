@@ -78,8 +78,9 @@ Configure your `appsettings.json` file with the necessary API keys and settings:
     ]
   }
 }
+```
 
-## Dependency Injection
+### Dependency Injection
 
 The Conversion Service Project utilizes dependency injection to manage the application's services and components. Dependency injection allows for loose coupling between classes, making the codebase more maintainable and testable.
 
@@ -93,3 +94,106 @@ public void ConfigureServices(IServiceCollection services)
     services.AddScoped<IExchangeRateService, ExchangeRateService>();
     services.AddScoped<IConversionService, ConversionService>();
 }
+In this configuration:
+
+1. AddMemoryCache(): Registers the in-memory cache service provided by ASP.NET Core. This cache is used to store and retrieve conversion responses.
+2. AddScoped<IExchangeRateService, ExchangeRateService>(): Registers the ExchangeRateService implementation as a scoped service. This service is responsible for fetching exchange rates from the external             API.AddScoped<IConversionService, ConversionService>(): Registers the ConversionService implementation as a scoped service. This service handles currency conversion requests and caching of conversion             responses.
+```
+
+## Usage
+
+### Running the Application
+```sh
+dotnet run
+```
+#### API Endpoints
+Convert Currency
+URL: /api/convert
+Method: POST
+Request Body:
+
+```json
+Copy code
+{
+  "from": "USD",
+  "to": "EUR",
+  "amount": 100
+}
+```
+Response:
+
+```json
+Copy code
+{
+  "from": "USD",
+  "to": "EUR",
+  "amount": 100,
+  "convertedAmount": 85
+}
+```
+
+### Running Tests
+Unit tests are written using NUnit and Moq. To run the tests, use the following command:
+
+```sh
+Copy code
+dotnet test
+```
+#### Sample Unit Test
+A sample unit test for verifying the caching operation might look like this:
+
+```csharp
+ [Test]
+        public async Task ConvertCurrencyAsync_SupportedCurrency_ReturnsConvertedAmount()
+        {
+            // Arrange
+            var request = new ConversionRequestDto
+            {
+                From = "USD",
+                To = "EUR",
+                Amount = 100
+            };
+            var cacheKey = $"Conversion_{request.From.ToUpper()}_{request.To.ToUpper()}";
+            object cachedResponse = null;
+            var exchangeRateDto = new ExchangeRateDto
+            {
+                Base = request.From,
+                Rates = new Dictionary<string, decimal> { { request.To, 0.85m } }
+            };
+            var httpResponse = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(JsonConvert.SerializeObject(exchangeRateDto))
+            };
+
+            _cacheMock.Setup(x => x.TryGetValue(cacheKey, out cachedResponse)).Returns(false);
+            // Mocking the SetCacheKey method
+            _currencyService.Setup(x => x.SetCacheKey(It.IsAny<string>(), It.IsAny<object>()));
+            var httpClient = CreateMockHttpClient(httpResponse);
+            _httpClientFactoryMock.Setup(x => x.CreateClient("Frankfurter")).Returns(httpClient);
+
+            // Act
+            var result = await _currencyService.Object.ConvertCurrencyAsync(request);
+
+            // Assert
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(request.Amount * 0.85m, result.Data.ConvertedAmount);
+        }
+```
+### Packages Used
+Newtonsoft.Json - For JSON serialization and deserialization.
+Moq - For mocking dependencies in unit tests.
+NUnit - For unit testing.
+Microsoft.Extensions.Caching.Memory - For in-memory caching.
+Adding Packages
+To add the necessary packages, run the following commands:
+
+```sh
+Copy code
+dotnet add package Newtonsoft.Json
+dotnet add package Moq
+dotnet add package NUnit
+dotnet add package Microsoft.Extensions.Caching.Memory
+```
+### License
+This project is licensed under the MIT License - see the LICENSE file for details.

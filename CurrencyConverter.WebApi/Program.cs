@@ -48,7 +48,8 @@ namespace CurrencyConverter.WebApi
 
         private static void ConfigureMiddleware(WebApplication app)
         {
-            app.UseHttpsRedirection();
+            // Open it when u have the ssl certificate and change the application url in profile under properties folder
+            //app.UseHttpsRedirection();
             app.UseRouting();
 
             // Use Rate Limiting Middleware

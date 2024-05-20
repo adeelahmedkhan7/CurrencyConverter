@@ -2,6 +2,9 @@
 
 namespace CurrencyConverter.WebApi.Middleware
 {
+    /// <summary>
+    /// Manage the number of concurrent request 
+    /// </summary>
     public class ThrottlingMiddleware
     {
         private readonly RequestDelegate _next;

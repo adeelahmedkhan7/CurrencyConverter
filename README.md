@@ -33,21 +33,25 @@ The Currency Conversion Service Project is a .NET-based application designed to 
 
     ```sh
     git clone https://github.com/your-username/CurrencyConverter.git
-    ```
-
+    ```   
+   
 2. **Restore dependencies**
 
+    Open the terminal and run these commands
+
     ```sh
-    dotnet restore
+    cd  D:\YourProjectLocation\CurrencyConverter\CurrencyConverter.WebApi
+    dotnet restore CurrencyConverter.sln
     ```
 
 3. **Build the project**
 
     ```sh
-    dotnet build
+    dotnet restore CurrencyConverter.sln
     ```
+
 4. **Run the project**
-    Before run the command select the webapi project.
+    
     ```sh
     dotnet run
     ```

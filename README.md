@@ -8,8 +8,7 @@ The Currency Conversion Service Project is a .NET-based application designed to 
 
 - Converts currency amounts based on the latest exchange rates.
 - Caches conversion responses to improve performance.
-- Paginated record retrieval.
-- Excludes weekends and holidays from date ranges.
+- Paginated historical record retrieval.
 
 ## Table of Contents
 

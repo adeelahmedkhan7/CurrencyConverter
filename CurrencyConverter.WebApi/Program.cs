@@ -52,11 +52,11 @@ namespace CurrencyConverter.WebApi
             //app.UseHttpsRedirection();
             app.UseRouting();
 
-            // Use Rate Limiting Middleware
-            app.UseIpRateLimiting();
-
             // Add throttling middleware
             app.UseMiddleware<ThrottlingMiddleware>();
+
+            // Use Rate Limiting Middleware
+            app.UseIpRateLimiting();
 
             // Generic Error Global Handling
             app.UseEndpoints(endpoints =>

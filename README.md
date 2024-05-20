@@ -33,7 +33,6 @@ The Currency Conversion Service Project is a .NET-based application designed to 
 
     ```sh
     git clone https://github.com/your-username/CurrencyConverter.git
-    cd conversion-service
     ```
 
 2. **Restore dependencies**
@@ -46,6 +45,11 @@ The Currency Conversion Service Project is a .NET-based application designed to 
 
     ```sh
     dotnet build
+    ```
+4. **Run the project**
+    Before run the command select the webapi project.
+    ```sh
+    dotnet run
     ```
 
 ## Configuration
@@ -60,7 +64,7 @@ Configure your `appsettings.json` file with the necessary API keys and settings:
     "FrankfurterBaseUrl": "https://api.frankfurter.app/",
     "UnsupportedCurrencies": [ "TRY", "PLN", "THB", "MXN" ]
   },
-  "ConcurrentThrottleRequest": 100,
+  "ConcurrentThrottleRequest": 100, -- Set the Concurrent request number 
   "IpRateLimiting": {
     "EnableEndpointRateLimiting": true,
     "StackBlockedRequests": true,
@@ -183,6 +187,7 @@ Moq - For mocking dependencies in unit tests.
 NUnit - For unit testing.
 Microsoft.Extensions.Caching.Memory - For in-memory caching.
 Adding Packages
+AspNetCoreRateLimit - For rate limiting
 To add the necessary packages, run the following commands:
 
 ```sh
@@ -190,6 +195,7 @@ dotnet add package Newtonsoft.Json
 dotnet add package Moq
 dotnet add package NUnit
 dotnet add package Microsoft.Extensions.Caching.Memory
+dotnet add pacakage AspNetCoreRateLimit
 ```
 ### License
 This project is licensed under the MIT License - see the LICENSE file for details.
